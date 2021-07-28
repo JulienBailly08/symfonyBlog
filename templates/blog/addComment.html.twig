@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+{% block title %}Grain de sel{% endblock %}
+{% form_theme formComment 'bootstrap_4_layout.html.twig' %}
+
+{% block body %}
+
+    <h1>Ajout de votre commentaire</h1>
+
+    {{form_start(formComment)}}
+
+  
+    {{form_row(formComment.author,{'value' : app.user.firstname ~' '~ app.user.name }) }}
+    {{form_row(formComment.content,{'attr' :{'placeholder' :'Votre avis'},'label' : 'Expression libre :'}) }}
+
+    <button type="submit" class="btn btn-outline-primary my-2">Soumettre l'avis</button>
+
+    {{form_end(formComment)}}
+   
+{% endblock %}

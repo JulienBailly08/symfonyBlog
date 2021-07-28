@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+{% block title %}Détail Article{% endblock %}
+{% block body %}
+    <article>
+    <h2>{{article.title}}</h2>
+    <div class="metadata"> Ecrit le {{ article.createdAt | date('d/m/Y')}} à {{ article.createdAt | date('H:i')}} dans la catégorie {{article.category.title}}</div>
+    <div class="contend mb-4">
+        <img src="{{asset(article.image)}}" alt="">
+        {{article.content|raw}}
+        <hr>
+        {{article.content|raw}}
+        <a href={{ path('blog')}} class="btn btn-outline-secondary mt-4">Revenir à la liste des posts</a>
+        <a href={{ path('blogCat', {'id':article.category.id}) }} class="btn btn-outline-secondary mt-4">Revenir à la liste de la categorie</a>
+        {% if  app.user.email is defined and app.user.email == "julienbailly08@gmail.com"  %}
+        <a href={{ path('blog_edit',{'id':article.id}) }} class="btn btn-outline-warning ms-4 mt-4">Modification du Post</a>
+        <a href={{ path('blog_erase',{'id':article.id}) }} class="btn btn-outline-danger mt-4">Supprimer</a>
+        {% endif %}
+
+    </div>
+</article>
+<section id="commentaires">
+    {% for comment in article.comments %}
+    <hr>
+    <div class="comment">
+        <div class="row">
+            <div class="col-4">
+            {{comment.author}} (<small> {{comment.createdAt | date('d/m/Y à H:i')}} </small>)
+            </div>
+            <div class="col">
+            {{ comment.content|raw }}         
+            </div>                    
+        </div>
+        <div class="col-3">
+         {% if  app.user.email is defined and app.user.email == "julienbailly08@gmail.com"  %}
+         <a href="{{ path('comment_erase', {'id':comment.id}) }}" class="btn btn-outline-danger my-5">Supprimer</a>
+         {% endif %}   
+         </div>
+    </div>
+    {% endfor %}
+                               
+                        
+    {% if app.user %}
+        <a href={{ path('addCom',{'id':article.id}) }} class="btn btn-outline-secondary my-4">Ajouter son Grain de sel</a>
+    {% else %}
+    <hr>
+    <h4>L'ajout de commentaires est réservé aux membres</h4>
+    {% endif %}   
+</section>
+
+{% endblock %}

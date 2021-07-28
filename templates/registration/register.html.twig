@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+{% form_theme registrationForm 'bootstrap_4_layout.html.twig' %}
+
+{% block title %}Création de compte{% endblock %}
+
+{% block body %}
+    {% for flashError in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+    {% endfor %}
+
+    <h1 class="text-center">Création de Compte</h1>
+
+    {{ form_start(registrationForm) }}       
+        {{ form_row(registrationForm.firstname,{'attr' :{'placeholder' :'Saisir votre prénom'},'label' : 'Votre prénom :'}) }}
+        {{ form_row(registrationForm.name,{'attr' :{'placeholder' :'Saisir votre nom'},'label' : 'Votre nom :'}) }}
+        {{ form_row(registrationForm.email,{'attr' :{'placeholder' :'Saisir votre mail'},'label' : 'Votre E-mail :'}) }}
+        {{ form_row(registrationForm.plainPassword, {
+            label: 'Mot de passe'
+        }) }}
+        <p>Je respecterai les règles de bonne conduite et de bienveillance inhérentes à ce type de projet.</p>
+        {{ form_row(registrationForm.agreeTerms,{'label' :'J\'accepte ces conditions'}) }}
+
+        <button type="submit" class="btn">S'enregistrer</button>
+    {{ form_end(registrationForm) }}
+{% endblock %}

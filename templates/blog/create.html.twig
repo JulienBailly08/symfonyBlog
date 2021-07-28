@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajout ou modification d'Article{% endblock %}
+{% form_theme formArticle 'bootstrap_4_layout.html.twig' %}
+
+{% block body %}
+
+    <h1>{% if editMode %}
+        Modification de l'article
+        {% else %} 
+        Création d'un nouvel article
+        {% endif %}         
+    </h1>
+    {{form_start(formArticle)}}
+
+    {{form_row(formArticle.title,{'attr' :{'placeholder' :'Titre de l\'article'},'label' : 'Titre :'}) }}
+    {{form_row(formArticle.category,{'label' : 'Catégorie :'}) }}
+    {{form_row(formArticle.content,{'attr' :{'placeholder' :'Texte de l\'article'},'label' : 'Contenu :'}) }}
+    {{form_row(formArticle.image,{'attr' :{'placeholder' :'Image de l\'article'},'label' : 'URL :'}) }}
+
+    <button type="submit" class="btn btn-outline-primary my-2">
+        {% if editMode %}
+        Enregistrement des modifications
+        {% else %}   
+        Création de l'article</button>
+        {% endif %} 
+    {{form_end(formArticle)}}
+   
+
+{% endblock %}

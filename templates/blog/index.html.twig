@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Articles{% endblock %}
+
+{% block body %}
+<section class ="articles">
+{% for article in articles %}
+<article>
+    <h2>{{article.title}}</h2>
+    <hr>
+    <div class="metadata"> Ecrit le {{article.createdAt | date('d/m/Y') }} à {{article.createdAt | date('H:i') }} dans la catégorie {{article.category.title}}
+        <div class="contend">
+            <img src="{{asset(article.image)}}" alt="">
+            {{article.content|raw}}
+            <a href="{{ path('blog_show', {'id':article.id}) }}" class="btn btn-outline-primary my-5">Lire la suite</a>
+            {% if  app.user.email is defined and app.user.email == "julienbailly08@gmail.com"  %}
+            <a href="{{ path('blog_erase', {'id':article.id}) }}" class="btn btn-outline-danger my-5">Supprimer</a>
+            {% endif %}          
+        </div>
+    </div>
+</article>
+{% endfor %}
+
+</section>
+
+{% endblock %}
