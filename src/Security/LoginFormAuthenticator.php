@@ -55,7 +55,7 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
         $session= new Session();
         $referer=$session->get('logPage');
                     
-                return new RedirectResponse($referer);
+        return new RedirectResponse($referer);
        // return new RedirectResponse($this->urlGenerator->generate('home'));
         
         //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);

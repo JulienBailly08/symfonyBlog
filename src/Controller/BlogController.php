@@ -140,12 +140,10 @@ class BlogController extends AbstractController
         if(!$article):
             throw $this->createNotFoundException('L\'article demandé n\'existe pas');
         endif;
-
         $entityManager->remove($article);
         $entityManager->flush();
 
-        return $this->redirectToRoute('blog');
-  
+        return $this->redirectToRoute('blog'); 
     }
 
     
