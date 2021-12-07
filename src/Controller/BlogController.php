@@ -61,7 +61,7 @@ class BlogController extends AbstractController
         $categories=$this->getCategories();
 
         return $this->render('blog/home.html.twig',[
-            'title'=>'Bienvenue à la racine de tout',
+            'title'=>'Bienvenue !',
             'categories'=>$categories         
         ]);
     }
